@@ -16,36 +16,31 @@ namespace PhoneBookUI.Areas.Admin.Components
             _phoneTypeManager = phoneTypeManager;
             _memberPhoneManager = memberPhoneManager;
         }
+        // Eğer email gönderimi yapılacaksa buraya IEmailSender eklenmelidir
 
-        //Eğer email gönderilicekse buraya IEmailSender eklenmelidir.
+
         public IViewComponentResult Invoke()
         {
             try
             {
-                AdminLeftMenuDataCountModel model = new AdminLeftMenuDataCountModel()
-                {
-                    //toplam üye sayısı
-                    TotalMemberCount=_memberManager.GetAll().Data.Count,
-
-                    //toplam telefon tipi sayısı
-                    TotalPhoneTypeCount=_phoneTypeManager.GetAll().Data.Count,
-                    
-                    //toplam numara sayısı
-                    TotalContactNumberCount=_memberPhoneManager.GetAll().Data.Count
-
-
-                };
+                AdminLeftMenuDataCountModel model =
+                    new AdminLeftMenuDataCountModel()
+                    {
+                        //toplam üye sayısı TempData["TotalMemberCount"]
+                        TotalMemberCount = _memberManager.GetAll().Data.Count,
+                        //toplam telefon tipi sayısı 
+                        TotalPhoneTypeCount = _phoneTypeManager.GetAll().Data.Count,
+                        //toplam numara sayısı
+                        TotalContactNumberCount = _memberPhoneManager.GetAll().Data.Count
+                    };
 
                 return View(model);
-
             }
             catch (Exception ex)
             {
-                //tempdata ile burda olusan hata gönderilebilir
-
+                //TempData ile burada oluşan hata gönderilebilir
                 return View(new AdminLeftMenuDataCountModel());
             }
         }
-
     }
 }

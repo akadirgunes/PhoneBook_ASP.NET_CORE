@@ -6,7 +6,5 @@
         public int TotalPhoneTypeCount { get; set; }
         public int TotalContactNumberCount { get; set; }
 
-
-
     }
 }

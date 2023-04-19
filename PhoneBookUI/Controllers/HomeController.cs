@@ -268,9 +268,9 @@ namespace PhoneBookUI.Controllers
 
                 //Var olan bir telefonu mu yazmış?
                 var samePhone = _memberPhoneManager.GetByConditions(
-                    x => x.Id!=model.Id &&
+                    x => x.Id != model.Id &&
                     x.MemberId == HttpContext.User.Identity.Name
-                    && x.Phone == (model.CountryCode+ model.Phone)).Data;
+                    && x.Phone == (model.CountryCode + model.Phone)).Data;
 
                 if (samePhone != null)
                 {
@@ -278,7 +278,7 @@ namespace PhoneBookUI.Controllers
                     return View(model);
                 }
 
-                phone.Phone = model.CountryCode+ model.Phone;
+                phone.Phone = model.CountryCode + model.Phone;
                 phone.FriendNameSurname = model.FriendNameSurname;
                 phone.PhoneTypeId = model.PhoneTypeId;
 
@@ -298,6 +298,17 @@ namespace PhoneBookUI.Controllers
                 ModelState.AddModelError("", "Beklenmedik hata" + ex.Message);
                 return View();
             }
+        }
+
+        public JsonResult GetDays()
+        {
+            var data = new string[] { "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi", "Pazar" };
+            return Json(new
+            {
+                isSuccess = true,
+                message = "Günler geldi!",
+                data = data
+            });
         }
     }
 }

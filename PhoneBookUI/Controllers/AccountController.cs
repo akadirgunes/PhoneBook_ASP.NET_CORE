@@ -137,7 +137,7 @@ namespace PhoneBookUI.Controllers
                 }
 
                 var user = _memberManager.GetById(model.Email).Data;
-                if (user==null)
+                if (user == null)
                 {
                     ViewBag.LoginErrorMsg = $"Kullanıcı adınız ya da şifrenizi doğru yazdığınızdan emin olunuz!";
                     return View(model);
@@ -167,7 +167,7 @@ namespace PhoneBookUI.Controllers
         }
 
 
-       [Authorize]
+        [Authorize]
         public IActionResult Logout()
         {
             HttpContext.SignOutAsync();
